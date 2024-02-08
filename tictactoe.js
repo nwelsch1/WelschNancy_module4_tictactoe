@@ -60,6 +60,7 @@ function checkForWinner() {
 	}
 
 	// See if any more moves are left
+	let foundEmpty = false;
 	for (let button of buttons) {
 		if (button.innerHTML !== "X" && button.innerHTML !== "O") {
 			return gameStatus.MORE_MOVES_LEFT;
@@ -72,16 +73,108 @@ function checkForWinner() {
 
 function newGame() {
 	// TODO: Complete the function
+	// Use clearTimeout() to clear the computer's move timeout and then set computerMoveTimeout back to 0.
+	clearTimeout(computerMoveTimeout);
+	computerMoveTimeout = 0;
+	// Loop through all game board buttons and set the inner HTML of each to an empty string. Also remove the class name and disabled attribute. The disabled attribute prevents the user from clicking the button, but all the buttons should be clickable when starting a new game.
+	const buttons = getGameBoardButtons();
+	for (let button of buttons) {
+		button.innerHTML = '';
+		button.removeAttribute('class');
+		button.disabled = false;
+	}
+	// Allow the player to take a turn by setting playerTurn to true.
+	playerTurn = true;
+	// Set the text of the turn information paragraph to "Your turn".
+	document.getElementById('turnInfo').innerText = "Your turn";
 }
 
 function boardButtonClicked(button) {
 	// TODO: Complete the function
+	// 	If playerTurn is true:
+	if(playerTurn) {
+
+	
+		// Set the button's inner HTML to "X".
+		button.innerHTML = 'X';
+		// Add the "x" class to the button.
+		button.classList.add('x');
+		// Set the button's disabled attribute to true so the button cannot be clicked again.
+		button.disabled = true;
+		// Call switchTurn() so the computer can take a turn.
+		switchTurn();
+	}
 }
 
 function switchTurn() {
 	// TODO: Complete the function
+	// store the place on the page where you'll display the turn information in a variable to make it easy to access inside of this function
+	// TODO
+
+	
+	// Call checkForWinner() to determine the game's status. (HINT: this function returns a value)
+	// TODO
+	let status = checkForWinner();
+	// 	If more moves are left (compare to gameStatus.MORE_MOVES_LEFT)
+	if(status == 1) {
+	// AND if the player just finished their turn
+		if(playerTurn) {
+			// use setTimeout() to call makeComputerMove() after 1 second
+			// Assign the return value of setTimeout() to computerMoveTimeout
+			// TODO
+			computerMoveTimeout = setTimeout(()>= {
+				makeComputerMove();
+			},1);	
+		}
+
+		// toggle playerTurn's value
+		// TODO		
+
+		// Update the turn info in the paragraph on the page (saved in a variable above)
+		// Set the turn information paragraph's text content to "Your turn" if playerTurn is true, or "Computer's turn" if playerTurn is false.
+		// TODO
+		// TODO
+	}
+	// otherwise... (no moves left)
+	else{
+		// Don't allow player to click anymore (no more turns)
+		// TODO
+		playerTurn = false;
+		// If the human has won, display the text "You win!" in the turn info paragraph. (compare to gameStatus.HUMAN_WINS)
+		// TODO
+		if(status == 2) {
+		// Otherwise, If the computer has won, display the text "Computer wins!" in the turn info paragraph. (compare to gameStatus.COMPUTER_WINS)
+		// TODO
+			document.getElementById('turnInfo').innerText = "Computer Wins!";
+		} else {
+		// Otherwise, If the game is a draw, display the text "Draw game" in the turn info paragraph. (compare to gameStatus.DRAW_GAME)
+		// TODO
+			document.getElementById('turnInfo').innerText = "Draw Game";
+		}
+	}
 }
 
+// I have included the code for this function for you as some of these concepts are not covered until later in the course
 function makeComputerMove() {
-	// TODO: Complete the function
+	// Find indices of available buttons
+	const buttons = getGameBoardButtons();
+	let indices = [];
+	buttons.forEach((button, i) => {
+		if (button.innerHTML !== "X" && button.innerHTML !== "O") {
+			indices.push(i);
+		}
+	});
+
+	// If an index is available, pick randomly
+	if (indices.length > 0) {
+		const index = indices[Math.floor(Math.random() * indices.length)];
+		buttons[index].innerHTML = "O";
+		buttons[index].classList.add("o");
+
+		// Don't allow user to click this button
+		buttons[index].disabled = true;
+
+		// Switch turn back to player
+		switchTurn();
+	}
 }
