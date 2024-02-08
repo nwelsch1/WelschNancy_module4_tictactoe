@@ -116,12 +116,16 @@ function switchTurn() {
 	// TODO
 	let status = checkForWinner();
 	// 	If more moves are left (compare to gameStatus.MORE_MOVES_LEFT)
-		// AND if the player just finished their turn
-		
+	if(status == 1) {
+	// AND if the player just finished their turn
+		if(playerTurn) {
 			// use setTimeout() to call makeComputerMove() after 1 second
 			// Assign the return value of setTimeout() to computerMoveTimeout
 			// TODO
-				
+			computerMoveTimeout = setTimeout(()>= {
+				makeComputerMove();
+			},1);	
+		}
 
 		// toggle playerTurn's value
 		// TODO		
@@ -130,20 +134,24 @@ function switchTurn() {
 		// Set the turn information paragraph's text content to "Your turn" if playerTurn is true, or "Computer's turn" if playerTurn is false.
 		// TODO
 		// TODO
-
+	}
 	// otherwise... (no moves left)
-
+	else{
 		// Don't allow player to click anymore (no more turns)
 		// TODO
-
+		playerTurn = false;
 		// If the human has won, display the text "You win!" in the turn info paragraph. (compare to gameStatus.HUMAN_WINS)
 		// TODO
-
+		if(status == 2) {
 		// Otherwise, If the computer has won, display the text "Computer wins!" in the turn info paragraph. (compare to gameStatus.COMPUTER_WINS)
 		// TODO
-
+			document.getElementById('turnInfo').innerText = "Computer Wins!";
+		} else {
 		// Otherwise, If the game is a draw, display the text "Draw game" in the turn info paragraph. (compare to gameStatus.DRAW_GAME)
 		// TODO
+			document.getElementById('turnInfo').innerText = "Draw Game";
+		}
+	}
 }
 
 // I have included the code for this function for you as some of these concepts are not covered until later in the course
