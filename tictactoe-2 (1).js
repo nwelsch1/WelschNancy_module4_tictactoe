@@ -114,7 +114,7 @@ function switchTurn() {
 	
 	// Call checkForWinner() to determine the game's status. (HINT: this function returns a value)
 	// TODO
-	
+	let status = checkForWinner();
 	// 	If more moves are left (compare to gameStatus.MORE_MOVES_LEFT)
 		// AND if the player just finished their turn
 		
