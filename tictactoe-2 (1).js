@@ -75,25 +75,35 @@ function newGame() {
 	// TODO: Complete the function
 	// Use clearTimeout() to clear the computer's move timeout and then set computerMoveTimeout back to 0.
 	clearTimeout(computerMoveTimeout);
+	computerMoveTimeout = 0;
 	// Loop through all game board buttons and set the inner HTML of each to an empty string. Also remove the class name and disabled attribute. The disabled attribute prevents the user from clicking the button, but all the buttons should be clickable when starting a new game.
-
+	const buttons = getGameBoardButtons();
+	for (let button of buttons) {
+		button.innerHTML = '';
+		button.removeAttribute('class');
+		button.disabled = false;
+	}
 	// Allow the player to take a turn by setting playerTurn to true.
-
+	playerTurn = true;
 	// Set the text of the turn information paragraph to "Your turn".
+	document.getElementById('turnInfo').innerText = "Your turn";
 }
 
 function boardButtonClicked(button) {
 	// TODO: Complete the function
 	// 	If playerTurn is true:
+	if(playerTurn) {
 
+	
 		// Set the button's inner HTML to "X".
-
+		button.innerHTML = 'X'
 		// Add the "x" class to the button.
-
+		button.classList.add('x');
 		// Set the button's disabled attribute to true so the button cannot be clicked again.
-
+		button.disabled = true;
 		// Call switchTurn() so the computer can take a turn.
-}
+		switchTurn();
+	}
 
 function switchTurn() {
 	// TODO: Complete the function
