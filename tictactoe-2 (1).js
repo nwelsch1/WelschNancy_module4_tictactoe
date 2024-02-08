@@ -96,7 +96,7 @@ function boardButtonClicked(button) {
 
 	
 		// Set the button's inner HTML to "X".
-		button.innerHTML = 'X'
+		button.innerHTML = 'X';
 		// Add the "x" class to the button.
 		button.classList.add('x');
 		// Set the button's disabled attribute to true so the button cannot be clicked again.
@@ -104,6 +104,7 @@ function boardButtonClicked(button) {
 		// Call switchTurn() so the computer can take a turn.
 		switchTurn();
 	}
+}
 
 function switchTurn() {
 	// TODO: Complete the function
@@ -113,6 +114,7 @@ function switchTurn() {
 	
 	// Call checkForWinner() to determine the game's status. (HINT: this function returns a value)
 	// TODO
+	let status = checkForWinner();
 	// 	If more moves are left (compare to gameStatus.MORE_MOVES_LEFT)
 		// AND if the player just finished their turn
 		
