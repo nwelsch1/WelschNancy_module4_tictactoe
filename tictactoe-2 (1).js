@@ -74,7 +74,7 @@ function checkForWinner() {
 function newGame() {
 	// TODO: Complete the function
 	// Use clearTimeout() to clear the computer's move timeout and then set computerMoveTimeout back to 0.
-	clearTimeout.addEventListener("click", computerMoveTimeout[0]);
+	clearTimeout(computerMoveTimeout);
 	// Loop through all game board buttons and set the inner HTML of each to an empty string. Also remove the class name and disabled attribute. The disabled attribute prevents the user from clicking the button, but all the buttons should be clickable when starting a new game.
 
 	// Allow the player to take a turn by setting playerTurn to true.
